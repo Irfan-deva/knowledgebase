@@ -1,6 +1,6 @@
 import { Platform, SafeAreaView, StyleSheet, Text, View, StatusBar } from 'react-native'
 import React from 'react'
-import { Colors } from "../../constants/Colors"
+import { COLORS } from "../../constants"
 
 const Screen = ({ children }) => {
   return (
@@ -16,6 +16,6 @@ const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
-    backgroundColor: Colors.background
+    backgroundColor: COLORS.lightWhite
   }
 })
