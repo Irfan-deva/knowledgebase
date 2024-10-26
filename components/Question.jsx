@@ -4,7 +4,8 @@ import { AntDesign } from '@expo/vector-icons';
 import { memo } from 'react';
 import { useDispatch } from 'react-redux';
 const { width, height } = Dimensions.get('window');
-import { setOption } from '../redux/quizSlice';
+import { setOption } from '../app/store/quizSlice';
+import Screen from '../app/screens/Screen';
 
 const OPTON_TITLES = ['A', 'B', 'C', 'D', 'E'];
 
@@ -12,29 +13,31 @@ const Question = ({ question, num }) => {
   const dispatch = useDispatch();
   console.log(`------- q ${num + 1} was rendered -----------`);
   return (
-    <View style={styles.questionContainer}>
-      <Text style={styles.question}>{`(Q.${num + 1} )  ${question.question}`}</Text>
-      <FlatList
-        data={question.options}
-        renderItem={({ item, index }) =>
-          <TouchableOpacity
-            style={index === question.selected ? styles.selectedOption : styles.option}
-            activeOpacity={.95}
-            onPress={() => {
-              dispatch(setOption({ option: index, num: num }))
-            }}>
-            <View style={styles.optionIndex}>
-              {
-                index == question.selected ?
-                  <AntDesign name="checkcircleo" size={20} color="#336600" /> :
-                  <Text style={styles.optionIndexTitle}>{OPTON_TITLES[index]}</Text>
-              }
-              <Text >{item}</Text>
-            </View>
+    <Screen>
+      <View style={styles.questionContainer}>
+        <Text style={styles.question}>{`(Q.${num + 1} )  ${question.question}`}</Text>
+        <FlatList
+          data={question.options}
+          renderItem={({ item, index }) =>
+            <TouchableOpacity
+              style={index === question.selected ? styles.selectedOption : styles.option}
+              activeOpacity={.95}
+              onPress={() => {
+                dispatch(setOption({ option: index, num: num }))
+              }}>
+              <View style={styles.optionIndex}>
+                {
+                  index == question.selected ?
+                    <AntDesign name="checkcircleo" size={20} color="#336600" /> :
+                    <Text style={styles.optionIndexTitle}>{OPTON_TITLES[index]}</Text>
+                }
+                <Text >{item}</Text>
+              </View>
 
-          </TouchableOpacity>}
-      />
-    </View>
+            </TouchableOpacity>}
+        />
+      </View>
+    </Screen>
   )
 }
 
@@ -49,7 +52,7 @@ const styles = StyleSheet.create({
   },
   question: {
     fontSize: SIZES.medium,
-    fontWeight: 500,
+    fontWeight: "500",
     marginBottom: 16,
     padding: 10,
     color: COLORS.black

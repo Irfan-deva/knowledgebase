@@ -5,11 +5,10 @@ import { MaterialIcons } from '@expo/vector-icons';
 import AppText from './AppText';
 import { COLORS } from '../constants';
 import { welcomeListData } from '../data/listdata';
-import { useNavigation } from '@react-navigation/native';
+import { router } from 'expo-router';
 const { width, height } = Dimensions.get('window');
 
 const Welcome = () => {
-  const nav = useNavigation();
   return (
     <View style={styles.container}>
       <AppText style={styles.welcome}>Welcome</AppText>
@@ -21,7 +20,7 @@ const Welcome = () => {
               <View key={index}>
                 <TouchableOpacity style={styles.btn}
                   activeOpacity={.6}
-                  onPress={() => nav.navigate('AddQuestionScreen')}>
+                  onPress={() => router.push('AddQuestionScreen')}>
                   <View style={styles.iconBg(item.color)}><MaterialIcons name={item.img} size={24} color={item.color} /></View>
                   <AppText style={styles.btnText}>{item.title}</AppText>
                 </TouchableOpacity>

@@ -5,10 +5,9 @@ const CARD_SIZE = .70 * width;
 import AppText from './AppText';
 import React from 'react'
 import { COLORS, SIZES, SPACING, icons } from '../constants';
-import { useNavigation } from '@react-navigation/native';
 import { bookSlider } from '../data/listdata'
+import { router } from 'expo-router';
 const Categories = () => {
-  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -27,7 +26,7 @@ const Categories = () => {
             activeOpacity={.6}
             style={styles.card}
             // onPress={() => navigation.navigate(item.link, { cat: item.cat })}
-            onPress={() => navigation.navigate('Quizes')}
+            onPress={() => router.push('quiz/Quizes')}
           >
             <View style={{ backgroundColor: COLORS.white, padding: 8, borderRadius: 8, width: 52 }}><Image source={item.img} style={styles.img} /></View>
             <AppText style={{ marginTop: 4, fontWeight: 700, fontSize: 14, color: COLORS.secondary }}>{item.name}</AppText>
